@@ -33,7 +33,11 @@ class Main {
 					System.out.println("게시글이 없습니다.");
 
 				} else {
-					System.out.println("게시글이 있습니다.");
+					System.out.println("번호 / 제목");
+					for (int i = 0; i < articles.size(); i++) {
+						Article article = articles.get(i);
+						System.out.println(article.id + "   / " + article.title);
+					}
 
 				}
 			} else {
