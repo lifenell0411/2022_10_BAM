@@ -1,5 +1,7 @@
 package com.KoreaIT.java.BAM;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,7 +30,9 @@ class Main {
 
 				System.out.printf("%d번글이 생성되었습니다\n", id);
 
-			} else if (command.equals("article list")) {
+			}
+
+			else if (command.equals("article list")) {
 				if (articles.size() == 0) {
 					System.out.println("게시글이 없습니다.");
 					continue;
@@ -40,6 +44,33 @@ class Main {
 					Article article = articles.get(i);
 
 					System.out.println(article.id + "   / " + article.title);
+				}
+
+			} else if (command.startsWith("article detail ")) {
+				String[] commandDiv = command.split(" ");
+				int id = Integer.parseInt(commandDiv[2]);
+
+				Article foundArticle = null;
+				for (int i = 0; i < articles.size(); i++) {
+					Article article = articles.get(i);
+
+					if (article.id == id) {
+						foundArticle = article;
+						break;
+					}
+				}
+
+				if (foundArticle == null) {
+					System.out.println(id + "번 게시물은 존재하지 않습니다.");
+					continue;
+				} else {
+
+					LocalDate now = LocalDate.now();
+					LocalTime now1 = LocalTime.now();
+					System.out.println("번호 : " + foundArticle.id);
+					System.out.println("날짜 : " + now + " " + now1);
+					System.out.println("제목 : " + foundArticle.title);
+					System.out.println("내용 : " + foundArticle.body);
 				}
 
 			} else {
