@@ -1,12 +1,14 @@
 package com.KoreaIT.java.BAM;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 class Main {
+	@SuppressWarnings("removal")
 	public static void main(String[] args) {
 		System.out.println("==프로그램 시작==");
 		Scanner sc = new Scanner(System.in);
@@ -66,13 +68,34 @@ class Main {
 				} else {
 
 					LocalDate now = LocalDate.now();
-					LocalTime now1 = LocalTime.now();
+					LocalDateTime timePoint = LocalDateTime.now();
+					LocalDateTime now1 = timePoint.truncatedTo(ChronoUnit.SECONDS);
 					System.out.println("번호 : " + foundArticle.id);
 					System.out.println("날짜 : " + now + " " + now1);
 					System.out.println("제목 : " + foundArticle.title);
 					System.out.println("내용 : " + foundArticle.body);
 				}
+			} else if (command.startsWith("article delete ")) {
+				String[] commandDiv = command.split(" ");
+				int id = Integer.parseInt(commandDiv[2]);
 
+				int foundIndex = -1;
+				for (int i = 0; i < articles.size(); i++) {
+					Article article = articles.get(i);
+
+					if (article.id == id) {
+						foundIndex = i;
+						break;
+					}
+				}
+
+				if (foundIndex == -1) {
+					System.out.println(id + "번 게시물은 존재하지 않습니다.");
+					continue;
+				}
+
+				articles.remove(foundIndex);
+				System.out.println(id + "번 게시물을 삭제했습니다.");
 			} else {
 				System.out.println("존재하지 않는 명령어입니다");
 			}
