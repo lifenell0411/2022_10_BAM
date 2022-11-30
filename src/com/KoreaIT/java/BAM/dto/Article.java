@@ -7,7 +7,7 @@ public class Article {
 	public String title;
 	public String body;
 	public int hit;
-
+	 
 	public Article(int id, String regDate, String updateDate, String title, String body) {
 		this(id, regDate, updateDate, title, body, 0);
 	}
@@ -20,6 +20,15 @@ public class Article {
 		this.body = body;
 		this.hit = hit;
 	}
+
+ 
+
+	 
+	 
+
+
+ 
+ 
 
 	public void increaseHitCount() {
 		hit++;
