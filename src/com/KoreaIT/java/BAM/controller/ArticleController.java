@@ -31,10 +31,7 @@ public class ArticleController extends Controller {
 			showDetail();
 			break;
 		case "write":
-			if (isLogined() == false) {
-				System.out.println("로그인 후 이용해주세요");
-				return;
-			}
+
 			doWrite();
 			break;
 		case "modify":
@@ -129,9 +126,9 @@ public class ArticleController extends Controller {
 			System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
 			return;
 		}
-		
-		if(foundArticle.memberId != loginedMember.id) {
-			System.out.println("권한이 없습니다.");
+
+		if (foundArticle.memberId != loginedMember.id) {
+			System.out.println("권한이 없습니다");
 			return;
 		}
 
@@ -151,14 +148,16 @@ public class ArticleController extends Controller {
 	private void doDelete() {
 		String[] commandDiv = command.split(" ");
 		int id = Integer.parseInt(commandDiv[2]);
+
 		Article foundArticle = getArticleById(id);
 
 		if (foundArticle == null) {
 			System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
 			return;
 		}
-		if(foundArticle.memberId != loginedMember.id) {
-			System.out.println("권한이 없습니다.");
+
+		if (foundArticle.memberId != loginedMember.id) {
+			System.out.println("권한이 없습니다");
 			return;
 		}
 
