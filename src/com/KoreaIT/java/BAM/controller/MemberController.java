@@ -46,17 +46,16 @@ public class MemberController extends Controller {
 	}
 
 	private void doLogout() {
-
 		if (isLogined() == false) {
 			System.out.println("로그인 상태가 아닙니다");
-
+			return;
 		}
+
 		loginedMember = null;
-		System.out.println("로그아웃 되었습니다.");
+		System.out.println("로그아웃 되었습니다");
 	}
 
 	private void doLogin() {
-
 		if (isLogined()) {
 			System.out.println("이미 로그인 되어있습니다");
 			return;
@@ -78,6 +77,7 @@ public class MemberController extends Controller {
 			System.out.println("비밀번호를 확인해주세요");
 			return;
 		}
+
 		loginedMember = member;
 
 		System.out.printf("로그인 성공! %s님 환영합니다\n", member.name);
@@ -160,7 +160,7 @@ public class MemberController extends Controller {
 	}
 
 	public void makeTestData() {
-		System.out.println("테스트를 위한 회원데이터를 생성합니다");
+		System.out.println("테스트를 위한 회원 데이터를 생성합니다");
 
 		members.add(new Member(1, Util.getTimeAndDateStr(), Util.getTimeAndDateStr(), "admin", "admin", "관리자"));
 		members.add(new Member(2, Util.getTimeAndDateStr(), Util.getTimeAndDateStr(), "test1", "test1", "회원1"));
