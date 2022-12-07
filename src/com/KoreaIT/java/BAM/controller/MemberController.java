@@ -32,17 +32,32 @@ public class MemberController extends Controller {
 		case "login":
 			doLogin();
 			break;
+		case "logout":
+			doLogout();
+			break;
 		default:
 			System.out.println("존재하지 않는 명령어입니다");
 			break;
 		}
 	}
 
-	
-	
+	private boolean isLogined() {
+		return loginedMember != null;
+	}
+
+	private void doLogout() {
+
+		if (isLogined() == false) {
+			System.out.println("로그인 상태가 아닙니다");
+
+		}
+		loginedMember = null;
+		System.out.println("로그아웃 되었습니다.");
+	}
+
 	private void doLogin() {
 
-		if (loginedMember != null) {
+		if (isLogined()) {
 			System.out.println("이미 로그인 되어있습니다");
 			return;
 		}
@@ -143,6 +158,7 @@ public class MemberController extends Controller {
 		}
 		return -1;
 	}
+
 	public void makeTestData() {
 		System.out.println("테스트를 위한 회원데이터를 생성합니다");
 
@@ -150,6 +166,5 @@ public class MemberController extends Controller {
 		members.add(new Member(2, Util.getTimeAndDateStr(), Util.getTimeAndDateStr(), "test1", "test1", "회원1"));
 		members.add(new Member(3, Util.getTimeAndDateStr(), Util.getTimeAndDateStr(), "test2", "test2", "회원2"));
 	}
-
 
 }
